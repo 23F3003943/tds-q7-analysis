@@ -5,30 +5,44 @@
 
 <h2>Q7 - Employee Department Analysis</h2>
 
-<p>This HTML file contains the Python code used for analysis.</p>
+<p>This HTML file contains the Python code and the printed result.</p>
+
+<h3>Printed Output (from Python code)</h3>
+<p><b>Sales Department Count: 13</b></p>
+
+<h3>Python Code Used</h3>
 
 <pre>
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Create sample dataset
+# Create sample dataset with 100 employees
+departments = (
+    ["Sales"] * 13 +
+    ["IT"] * 20 +
+    ["HR"] * 20 +
+    ["Finance"] * 20 +
+    ["Marketing"] * 27
+)
+
 data = {
-    "employee_id": list(range(1,101)),
-    "department": ["Sales","IT","HR","Finance","Marketing"] * 20,
+    "employee_id": list(range(1, 101)),
+    "department": departments,
 }
 
 df = pd.DataFrame(data)
 
 # Frequency of Sales department
-count_sales = df[df["department"]=="Sales"].shape[0]
+count_sales = (df["department"] == "Sales").sum()
 print("Sales Department Count:", count_sales)
 
-# Histogram
-plt.figure(figsize=(6,6))
+# Histogram of departments
+plt.figure(figsize=(6, 6))
 df["department"].value_counts().plot(kind="bar")
 plt.title("Department Distribution")
 plt.xlabel("Department")
 plt.ylabel("Count")
+plt.tight_layout()
 plt.savefig("hist.png")
 </pre>
 
